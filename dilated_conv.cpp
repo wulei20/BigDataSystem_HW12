@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 
     // 数据预处理的调度
     filter.in().compute_at(dilated_conv, r.x)
-        .vectorize(_0, vec)       // 滤波器向量化
+        .vectorize(_0, vec)       // 卷积核向量化
         .unroll(_0)               // 展开内部维度
         .unroll(_3);              // 展开通道维度
 
