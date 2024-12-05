@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
         .vectorize(c, vec)
         .unroll(c)
         .unroll(x)
-        .unroll(y);
+        .unroll(y)
 	.unroll(r.x, 2);
     filter.in().compute_at(conv, r.x).vectorize(_0, vec).unroll(_0).unroll(_3);
     input.in().compute_at(conv, x).unroll(_0);
