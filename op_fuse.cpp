@@ -98,6 +98,7 @@ int main(int argc, char **argv) {
 
     filter.in().compute_at(dilated_conv, r.x)
         .vectorize(_0, vec)
+        .unroll(_0)
         .unroll(_3);
     input.in().compute_at(dilated_conv, x)
         .unroll(_0);
