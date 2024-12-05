@@ -8,7 +8,7 @@ using namespace Halide::Tools;
 
 int main(int argc, char **argv) {
     const int N = 5, CI = 128, CO = 128, W = 100, H = 80, KW = 3, KH = 3;
-    const int dilation = 31;
+    const int dilation = (argc > 1) ? atoi(argv[1]) : 31;
     const float epsilon = 1.e-9f;
 
     ImageParam input(type_of<float>(), 4);
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 
     dilated_conv(c, x, y, n) = 0.0f;
     dilated_conv(c, x, y, n) += filter(c, r.y, r.z, r.x) * input(r.x, x + r.y * (dilation + 1), y + r.z * (dilation + 1), n);
-
+    printf("dilation: %d\n", dilation);
     Func mu("mu"), sigma("sigma"), out("out"), tmp("tmp");
     Func inv_sqrt("inv_sqrt");
     RDom s(0, W, 0, H, 0, N);
